@@ -1,0 +1,19 @@
+<div class="announcement-bar" role="region" aria-label="Announcement">
+  <div class="page-width announcement-bar__inner">
+    <span>{{ section.settings.text }}</span>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Announcement bar",
+  "settings": [
+    {
+      "type": "text",
+      "id": "text",
+      "label": "Text",
+      "default": "Free UK delivery over £150 · Dispatched in 1 working day"
+    }
+  ]
+}
+{% endschema %}

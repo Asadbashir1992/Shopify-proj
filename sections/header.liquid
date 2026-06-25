@@ -1,0 +1,60 @@
+<header class="site-header" data-header>
+  <div class="page-width site-header__inner">
+    <button class="site-header__nav-toggle" aria-label="{{ 'accessibility.menu' | t }}" data-menu-toggle>
+      {% render 'icon-menu' %}
+    </button>
+
+    <a href="{{ routes.root_url }}" class="site-header__logo">
+      {%- if settings.logo != blank -%}
+        <img src="{{ settings.logo | image_url: width: 320 }}" alt="{{ settings.brand_name }}" width="160" height="40" loading="eager">
+      {%- else -%}
+        <span class="site-header__logo-text">{{ settings.brand_name }}</span>
+      {%- endif -%}
+    </a>
+
+    <nav class="site-header__nav" data-menu aria-label="Primary">
+      <ul class="site-header__menu">
+        {%- for link in section.settings.menu.links -%}
+          <li class="site-header__menu-item{% if link.links != blank %} has-submenu{% endif %}">
+            <a href="{{ link.url }}"{% if link.active %} aria-current="page"{% endif %}>{{ link.title }}</a>
+            {%- if link.links != blank -%}
+              <ul class="site-header__submenu">
+                {%- for child in link.links -%}
+                  <li><a href="{{ child.url }}">{{ child.title }}</a></li>
+                {%- endfor -%}
+              </ul>
+            {%- endif -%}
+          </li>
+        {%- endfor -%}
+      </ul>
+    </nav>
+
+    <div class="site-header__actions">
+      <form action="{{ routes.search_url }}" method="get" role="search" class="site-header__search">
+        <input type="search" name="q" value="{{ search.terms | escape }}" placeholder="{{ 'general.search.placeholder' | t }}" aria-label="{{ 'general.search.search' | t }}">
+        <button type="submit" aria-label="{{ 'general.search.search' | t }}">{% render 'icon-search' %}</button>
+      </form>
+
+      <a href="{{ routes.account_url }}" class="site-header__icon" aria-label="Account">{% render 'icon-user' %}</a>
+
+      <a href="{{ routes.cart_url }}" class="site-header__icon site-header__cart" aria-label="{{ 'accessibility.cart' | t }}">
+        {% render 'icon-cart' %}
+        <span class="site-header__cart-count" data-cart-count>{{ cart.item_count }}</span>
+      </a>
+    </div>
+  </div>
+</header>
+
+{% schema %}
+{
+  "name": "Header",
+  "settings": [
+    {
+      "type": "link_list",
+      "id": "menu",
+      "label": "Main menu",
+      "default": "main-menu"
+    }
+  ]
+}
+{% endschema %}

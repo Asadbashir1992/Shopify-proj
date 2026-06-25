@@ -1,0 +1,38 @@
+<div class="page-width section">
+  <div class="section__head">
+    <h1 class="section__title">Search</h1>
+    <form action="{{ routes.search_url }}" method="get" role="search" class="search-page__form">
+      <input type="search" name="q" value="{{ search.terms | escape }}" placeholder="{{ 'general.search.placeholder' | t }}">
+      <button type="submit" class="btn">{{ 'general.search.search' | t }}</button>
+    </form>
+  </div>
+
+  {%- if search.performed -%}
+    <p class="search-page__count">{{ search.results_count }} results for "{{ search.terms }}"</p>
+    {%- if search.results.size > 0 -%}
+      {%- paginate search.results by 24 -%}
+      <div class="product-grid">
+        {%- for item in search.results -%}
+          {%- if item.object_type == 'product' -%}
+            {% render 'product-card', card_product: item %}
+          {%- else -%}
+            <div class="product-card"><div class="product-card__info"><h3 class="product-card__title"><a href="{{ item.url }}">{{ item.title }}</a></h3></div></div>
+          {%- endif -%}
+        {%- endfor -%}
+      </div>
+      {%- if paginate.pages > 1 -%}
+        <nav class="pagination">
+          {%- if paginate.previous -%}<a href="{{ paginate.previous.url }}">{{ 'general.pagination.previous' | t }}</a>{%- endif -%}
+          {%- if paginate.next -%}<a href="{{ paginate.next.url }}">{{ 'general.pagination.next' | t }}</a>{%- endif -%}
+        </nav>
+      {%- endif -%}
+      {%- endpaginate -%}
+    {%- else -%}
+      <p class="empty-state">No results found. Try another search.</p>
+    {%- endif -%}
+  {%- endif -%}
+</div>
+
+{% schema %}
+{ "name": "Search", "settings": [] }
+{% endschema %}

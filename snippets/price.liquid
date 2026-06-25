@@ -1,0 +1,14 @@
+{%- liquid
+  assign target = product | default: line_item.product
+  assign compare = target.compare_at_price
+  assign price = target.price
+-%}
+<span class="price{% if compare > price %} price--on-sale{% endif %}">
+  {%- if target.price_varies -%}
+    <span class="price__from">{{ 'products.product.from' | t }}</span>
+  {%- endif -%}
+  <span class="price__current">{{ price | money }}</span>
+  {%- if compare > price -%}
+    <s class="price__compare">{{ compare | money }}</s>
+  {%- endif -%}
+</span>

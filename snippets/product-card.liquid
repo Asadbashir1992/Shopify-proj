@@ -1,0 +1,25 @@
+{%- comment -%} Expects: card_product {%- endcomment -%}
+<div class="product-card">
+  <a href="{{ card_product.url }}" class="product-card__media">
+    {%- if card_product.featured_media -%}
+      <img src="{{ card_product.featured_media | image_url: width: 600 }}"
+           alt="{{ card_product.featured_media.alt | escape | default: card_product.title }}"
+           width="600" height="600" loading="lazy">
+    {%- else -%}
+      {{ 'product-1' | placeholder_svg_tag: 'product-card__placeholder' }}
+    {%- endif -%}
+    {%- if card_product.compare_at_price > card_product.price -%}
+      <span class="product-card__badge">Sale</span>
+    {%- elsif card_product.available == false -%}
+      <span class="product-card__badge product-card__badge--muted">Sold out</span>
+    {%- endif -%}
+  </a>
+  <div class="product-card__info">
+    {%- if card_product.type != blank -%}
+      <span class="product-card__vendor">{{ card_product.type }}</span>
+    {%- endif -%}
+    <h3 class="product-card__title"><a href="{{ card_product.url }}">{{ card_product.title }}</a></h3>
+    {% render 'price', product: card_product %}
+    <a href="{{ card_product.url }}" class="btn btn--small product-card__cta">{{ 'products.product.view' | t }}</a>
+  </div>
+</div>

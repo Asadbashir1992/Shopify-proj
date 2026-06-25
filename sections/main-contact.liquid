@@ -1,0 +1,36 @@
+<div class="page-width page-content">
+  <header class="page-content__head">
+    <h1 class="page-content__title">{{ page.title | default: 'Contact us' }}</h1>
+  </header>
+
+  <div class="page-content__body rte">
+    {{ page.content }}
+  </div>
+
+  {% form 'contact', class: 'contact-form' %}
+    {%- if form.posted_successfully? -%}
+      <p class="form-success">Thanks — your message has been sent. We’ll be in touch shortly.</p>
+    {%- endif -%}
+    {{ form.errors | default_errors }}
+    <div class="contact-form__row">
+      <label>Name<input type="text" name="contact[name]" required></label>
+      <label>Email<input type="email" name="contact[email]" required></label>
+    </div>
+    <label>Phone<input type="tel" name="contact[phone]"></label>
+    <label>Business / trade account? <input type="text" name="contact[Business]" placeholder="Company name (optional)"></label>
+    <label>Message<textarea name="contact[body]" rows="6" required></textarea></label>
+    <button type="submit" class="btn btn--lg">Send message</button>
+  {% endform %}
+</div>
+
+<style>
+  .contact-form { max-width: 640px; margin-top: 24px; display: flex; flex-direction: column; gap: 14px; }
+  .contact-form label { display: flex; flex-direction: column; gap: 6px; font-weight: 600; font-size: .9rem; }
+  .contact-form input, .contact-form textarea { border: 1px solid #cbd5e1; border-radius: 10px; padding: 11px 13px; font: inherit; }
+  .contact-form__row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+  @media (max-width: 600px) { .contact-form__row { grid-template-columns: 1fr; } }
+</style>
+
+{% schema %}
+{ "name": "Contact", "settings": [] }
+{% endschema %}

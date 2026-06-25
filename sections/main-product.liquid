@@ -1,0 +1,77 @@
+<div class="page-width product-page">
+  <div class="product-page__media">
+    {%- if product.featured_media -%}
+      <img class="product-page__image" src="{{ product.featured_media | image_url: width: 1000 }}" alt="{{ product.featured_media.alt | escape | default: product.title }}" width="1000" height="1000" loading="eager">
+    {%- else -%}
+      {{ 'product-1' | placeholder_svg_tag: 'product-page__placeholder' }}
+    {%- endif -%}
+    {%- if product.media.size > 1 -%}
+      <div class="product-page__thumbs">
+        {%- for media in product.media limit: 5 -%}
+          <img src="{{ media | image_url: width: 160 }}" alt="{{ media.alt | escape }}" width="80" height="80" loading="lazy">
+        {%- endfor -%}
+      </div>
+    {%- endif -%}
+  </div>
+
+  <div class="product-page__details">
+    {%- if product.type != blank -%}<span class="product-page__type">{{ product.type }}</span>{%- endif -%}
+    <h1 class="product-page__title">{{ product.title }}</h1>
+
+    <div class="product-page__price">
+      {% render 'price', product: product %}
+      {%- if product.available -%}
+        <span class="stock-pill stock-pill--in">{{ 'products.product.in_stock' | t }}</span>
+      {%- else -%}
+        <span class="stock-pill stock-pill--out">{{ 'products.product.sold_out' | t }}</span>
+      {%- endif -%}
+    </div>
+
+    {%- assign wholesale = product.metafields.custom.wholesale_price -%}
+    {%- if wholesale != blank -%}
+      <div class="wholesale-box">
+        <strong>{{ 'products.product.wholesale' | t }}:</strong> {{ wholesale.value | money }}
+        <span>(min. order applies — <a href="{{ pages.contact.url | default: '/pages/contact' }}">trade enquiry</a>)</span>
+      </div>
+    {%- endif -%}
+
+    {% form 'product', product, class: 'product-form' %}
+      <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}">
+
+      {%- unless product.has_only_default_variant -%}
+        {%- for option in product.options_with_values -%}
+          <div class="product-form__option">
+            <label for="Option-{{ forloop.index }}">{{ option.name }}</label>
+            <select id="Option-{{ forloop.index }}" name="options[{{ option.name | escape }}]">
+              {%- for value in option.values -%}
+                <option value="{{ value | escape }}"{% if option.selected_value == value %} selected{% endif %}>{{ value }}</option>
+              {%- endfor -%}
+            </select>
+          </div>
+        {%- endfor -%}
+      {%- endunless -%}
+
+      <div class="product-form__buy">
+        <input type="number" name="quantity" value="1" min="1" class="product-form__qty" aria-label="Quantity">
+        <button type="submit" name="add" class="btn btn--lg btn--block"{% unless product.available %} disabled{% endunless %}>
+          {%- if product.available -%}{{ 'products.product.add_to_cart' | t }}{%- else -%}{{ 'products.product.sold_out' | t }}{%- endif -%}
+        </button>
+      </div>
+    {% endform %}
+
+    <div class="product-page__shipping">
+      <p>🚚 <strong>Dispatched in 1 working day.</strong> Choose 48-hour express or 3–5 working day delivery at checkout.</p>
+    </div>
+
+    {%- if product.description != blank -%}
+      <div class="product-page__description rte">{{ product.description }}</div>
+    {%- endif -%}
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Product",
+  "settings": []
+}
+{% endschema %}

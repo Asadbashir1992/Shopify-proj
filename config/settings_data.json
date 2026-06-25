@@ -1,0 +1,25 @@
+{
+  "current": {
+    "brand_name": "Shak Distributors",
+    "brand_tagline": "Wholesale & Retail Tech — Dispatched in 1 Working Day",
+    "color_accent": "#2563eb",
+    "color_text": "#0f172a",
+    "color_background": "#ffffff",
+    "color_header_bg": "#0b1220",
+    "color_header_text": "#ffffff",
+    "color_footer_bg": "#0b1220",
+    "color_footer_text": "#cbd5e1",
+    "type_body_font": "assistant_n4",
+    "type_heading_font": "assistant_n7",
+    "page_width": 1280,
+    "corner_radius": 12,
+    "sections": {},
+    "blocks": {}
+  },
+  "presets": {
+    "Shak Distributors": {
+      "brand_name": "Shak Distributors",
+      "brand_tagline": "Wholesale & Retail Tech — Dispatched in 1 Working Day"
+    }
+  }
+}

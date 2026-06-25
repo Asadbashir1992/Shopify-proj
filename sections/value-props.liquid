@@ -1,0 +1,60 @@
+<div class="value-props">
+  <div class="page-width value-props__grid">
+    {%- for block in section.blocks -%}
+      <div class="value-prop" {{ block.shopify_attributes }}>
+        <span class="value-prop__icon">
+          {%- case block.settings.icon -%}
+            {%- when 'bolt' -%}{% render 'icon-bolt' %}
+            {%- when 'truck' -%}{% render 'icon-truck' %}
+            {%- when 'shield' -%}{% render 'icon-shield' %}
+            {%- when 'headset' -%}{% render 'icon-headset' %}
+            {%- else -%}{% render 'icon-bolt' %}
+          {%- endcase -%}
+        </span>
+        <div>
+          <h3 class="value-prop__title">{{ block.settings.title }}</h3>
+          <p class="value-prop__text">{{ block.settings.text }}</p>
+        </div>
+      </div>
+    {%- endfor -%}
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Value props",
+  "blocks": [
+    {
+      "type": "item",
+      "name": "Item",
+      "settings": [
+        {
+          "type": "select",
+          "id": "icon",
+          "label": "Icon",
+          "options": [
+            { "value": "bolt", "label": "Bolt" },
+            { "value": "truck", "label": "Truck" },
+            { "value": "shield", "label": "Shield" },
+            { "value": "headset", "label": "Headset" }
+          ],
+          "default": "bolt"
+        },
+        { "type": "text", "id": "title", "label": "Title", "default": "Fast dispatch" },
+        { "type": "text", "id": "text", "label": "Text", "default": "Orders out in 1 working day" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Value props",
+      "blocks": [
+        { "type": "item", "settings": { "icon": "bolt", "title": "1 working-day dispatch", "text": "Order before 3pm and we ship the next working day." } },
+        { "type": "item", "settings": { "icon": "truck", "title": "48-hour delivery", "text": "Express 48hr and standard 3–5 day options at checkout." } },
+        { "type": "item", "settings": { "icon": "shield", "title": "Genuine stock", "text": "100% authentic devices with warranty." } },
+        { "type": "item", "settings": { "icon": "headset", "title": "Trade support", "text": "Wholesale pricing and dedicated account help." } }
+      ]
+    }
+  ]
+}
+{% endschema %}

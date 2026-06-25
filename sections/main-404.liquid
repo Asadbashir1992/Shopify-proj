@@ -1,0 +1,10 @@
+<div class="page-width error-404">
+  <h1 class="error-404__code">404</h1>
+  <h2 class="error-404__title">{{ 'general.404.title' | t }}</h2>
+  <p>{{ 'general.404.subtext' | t }}</p>
+  <a href="{{ routes.all_products_collection_url }}" class="btn btn--lg">{{ 'general.404.link' | t }}</a>
+</div>
+
+{% schema %}
+{ "name": "404", "settings": [] }
+{% endschema %}

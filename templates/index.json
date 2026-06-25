@@ -1,0 +1,64 @@
+{
+  "sections": {
+    "hero": {
+      "type": "hero",
+      "settings": {
+        "eyebrow": "Trade & Retail",
+        "heading": "Phones, Tablets, Watches & Laptops — at the right price",
+        "subheading": "Genuine stock from Apple, Samsung, Oppo & Huawei. Dispatched in 1 working day with 48-hour delivery available across the UK.",
+        "button_label": "Shop all products",
+        "button_link": "shopify://collections/all",
+        "button2_label": "Wholesale enquiries",
+        "button2_link": "shopify://pages/contact",
+        "bg_color": "#0b1220"
+      }
+    },
+    "value_props": {
+      "type": "value-props",
+      "blocks": {
+        "b1": { "type": "item", "settings": { "icon": "bolt", "title": "1 working-day dispatch", "text": "Order before 3pm and we ship the next working day." } },
+        "b2": { "type": "item", "settings": { "icon": "truck", "title": "48-hour delivery", "text": "Express 48hr and standard 3–5 day options at checkout." } },
+        "b3": { "type": "item", "settings": { "icon": "shield", "title": "Genuine stock", "text": "100% authentic devices with warranty." } },
+        "b4": { "type": "item", "settings": { "icon": "headset", "title": "Trade support", "text": "Wholesale pricing and dedicated account help." } }
+      },
+      "block_order": ["b1", "b2", "b3", "b4"]
+    },
+    "categories": {
+      "type": "category-grid",
+      "settings": {
+        "heading": "Shop by category",
+        "subheading": "Top brands across phones, watches and laptops"
+      },
+      "blocks": {
+        "c1": { "type": "category", "settings": { "collection": "apple-phones", "title": "Apple Phones" } },
+        "c2": { "type": "category", "settings": { "collection": "samsung", "title": "Samsung" } },
+        "c3": { "type": "category", "settings": { "collection": "oppo", "title": "Oppo" } },
+        "c4": { "type": "category", "settings": { "collection": "huawei", "title": "Huawei" } },
+        "c5": { "type": "category", "settings": { "collection": "watches", "title": "Watches" } },
+        "c6": { "type": "category", "settings": { "collection": "macbooks", "title": "MacBooks" } },
+        "c7": { "type": "category", "settings": { "collection": "laptops", "title": "Laptops" } },
+        "c8": { "type": "category", "settings": { "collection": "accessories", "title": "Accessories" } }
+      },
+      "block_order": ["c1", "c2", "c3", "c4", "c5", "c6", "c7", "c8"]
+    },
+    "featured_apple": {
+      "type": "featured-collection",
+      "settings": { "heading": "New in — Apple", "collection": "apple-phones", "products_to_show": 4 }
+    },
+    "featured_samsung": {
+      "type": "featured-collection",
+      "settings": { "heading": "Trending — Samsung", "collection": "samsung", "products_to_show": 4 }
+    },
+    "wholesale_cta": {
+      "type": "rich-text",
+      "settings": {
+        "heading": "Wholesale & trade accounts",
+        "text": "<p>Buying in volume? Shak Distributors supplies retailers, repair shops and resellers with genuine devices at trade prices. Get in touch for a live stock list and tiered pricing.</p>",
+        "button_label": "Contact us",
+        "button_link": "shopify://pages/contact",
+        "bg_color": "#f1f5f9"
+      }
+    }
+  },
+  "order": ["hero", "value_props", "categories", "featured_apple", "featured_samsung", "wholesale_cta"]
+}
