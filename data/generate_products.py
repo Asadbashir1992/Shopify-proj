@@ -166,6 +166,13 @@ def sku(tag, i):
     code = "".join(w[0] for w in tag.split())[:3].upper()
     return f"SHK-{code}-{i:03d}"
 
+# Optional: bake image URLs from data/images.json into the CSV's Image Src column.
+img_map = {}
+img_file = os.path.join(os.path.dirname(__file__), "images.json")
+if os.path.exists(img_file):
+    import json as _json
+    img_map = _json.load(open(img_file, encoding="utf-8"))
+
 out_path = os.path.join(os.path.dirname(__file__), "..", "products_shak-distributors.csv")
 with open(out_path, "w", newline="", encoding="utf-8") as f:
     w = csv.writer(f)
@@ -177,7 +184,7 @@ with open(out_path, "w", newline="", encoding="utf-8") as f:
             "Title", "Default Title", sku(tag, i), "shopify",
             25, "deny", "manual",
             f"{retail:.2f}", f"{compare:.2f}", "TRUE", "TRUE",
-            "", title, "FALSE", f"{title} | Shak Distributors",
+            img_map.get(handle(title), ""), title, "FALSE", f"{title} | Shak Distributors",
             blurb[:155], "active"
         ])
 print(f"Wrote {len(P)} products to {os.path.normpath(out_path)}")

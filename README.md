@@ -55,9 +55,11 @@ The **handle must match exactly** (set it in the collection's *Search engine lis
 1. **Products → Import → Add file** → choose `products_shak-distributors.csv`.
 2. Tick **Publish products** and import. 36 products load with descriptions, retail price,
    compare-at price, SKUs and stock (25 each). They auto-file into the collections above via tags.
-3. **Add product photos** — the CSV ships without images (so it imports cleanly anywhere).
-   Open each product and upload a photo, or add image URLs to the `Image Src` column before importing.
-   Until then the theme shows a tidy placeholder.
+3. **Product photos** — products ship with clean on-brand placeholder tiles (in `data/images.json`,
+   also baked into the CSV's `Image Src`). To use real photos: either upload them per product in
+   admin (drag-drop), **or** put a real image URL against the product's handle in `data/images.json`
+   and re-run `python3 data/generate_images.py`-free (just edit the value), then `python3 data/generate_products.py`
+   to refresh the CSV (the push script reads `images.json` directly).
 
 ### 4) Create the pages
 For each file in `content/pages/`:
